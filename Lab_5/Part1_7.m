@@ -12,7 +12,9 @@ R_E = 6371; % km
 
 h = 350; % km
 
-a0 = 0; % Use Values in part 1.5
+% Use Values in part 1.5 for a0 and a1
+
+a0 = 0; 
 
 a1 = 0;
 
@@ -58,7 +60,7 @@ function I = iono_delay(el_deg, vtec, K, R_E, h)
 % For cosine
 el = deg2rad(el_deg);
 
-F = 1 ./ (sqrt(1 - ((R_E .* cos(el)) ./ R_E + h).^2)); % F(el)
+F = 1 ./ (sqrt(1 - ( (R_E .* cos(el)) ./ (R_E + h) ).^2)); % F(el)
 
 I = K .* F .* vtec;
 
