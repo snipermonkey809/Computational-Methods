@@ -1,0 +1,61 @@
+clc
+clear
+close all
+
+% Initial Conditions
+
+TECU = 10 .^16; % Electrons / m^2
+
+f1 = 1575.42 .* 10.^6; % Hz
+
+R_E = 6371; % km
+
+h = 350; % km
+
+a0 = 0; % Use Values in part 1.5
+
+a1 = 0;
+
+times = [14, 16, 18];
+
+vtec_vals = a1 * times + a0;
+
+el_deg = 10:90; 
+
+% Compute
+
+K = (40.3 .* 10.^16) ./ (f1.^2); % m/TECU
+
+fprintf ('K = %.4f m/TECU', K)
+
+vtec = vtec_vals;
+
+I_1 = iono_delay(el_deg, vtec(1), K, R_E, h);
+
+I_2 = iono_delay(el_deg, vtec(2), K, R_E, h);
+
+I_3 = iono_delay(el_deg, vtec(3), K, R_E, h);
+
+figure
+hold on
+grid on
+
+plot(el_deg, I_1, 'DisplayName', sprintf('%d:00', times(1)))
+plot(el_deg, I_2, 'DisplayName', sprintf('%d:00', times(2)))
+plot(el_deg, I_3, 'DisplayName', sprintf('%d:00', times(3)))
+xlabel('Elevation angle (degrees)')
+ylabel('Ionospheric Delay (m)')
+legend('Location', 'best')
+title('Ionospheric Delay vs. Elevation Angle')
+hold off
+
+function I = iono_delay(el_deg, vtec, K, R_E, h)
+
+% For cosine
+el = deg2rad(el_deg);
+
+F = 1 ./ (sqrt(1 - ((R_E .* cos(el)) ./ R_E + h).^2)); % F(el)
+
+I = K .* F .* vtec;
+
+end
