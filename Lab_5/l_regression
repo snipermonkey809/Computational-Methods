@@ -25,12 +25,12 @@ n = length(x);
 x = x(:);
 y = y(:);
 
-a_1 = (n.*sum(x.*y)-sum(x.*y))/ (n.*sum(x.^2)-sum(x).^2);
+a_1 = (n.*sum(x).*sum(y))-(sum(x).*sum(y))/ (n.*sum(x.^2)-sum(x).^2);
 
 a_o = (sum(y)-a_1.*sum(x))/n;
 
 theta = [a_o ;a_1];
 
-r_sqrd = 1 - (sum(a_1.*x+a_o-y))/((1/n).*sum(y-mean(y)).^2);
+r_sqrd = 1 - (sum((a_1).^2.*x+a_o.^2-y))/((1/n).*sum(y-mean(y)).^2);
 
 return
