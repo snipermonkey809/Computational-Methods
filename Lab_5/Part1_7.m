@@ -36,6 +36,8 @@ I_2 = iono_delay(el_deg, vtec(2), K, R_E, h);
 
 I_3 = iono_delay(el_deg, vtec(3), K, R_E, h);
 
+% Plot
+
 figure
 hold on
 grid on
