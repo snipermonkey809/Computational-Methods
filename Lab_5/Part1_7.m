@@ -51,6 +51,8 @@ legend('Location', 'best')
 title('Ionospheric Delay vs. Elevation Angle')
 hold off
 
+% Function for I
+
 function I = iono_delay(el_deg, vtec, K, R_E, h)
 
 % For cosine
