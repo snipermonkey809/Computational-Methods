@@ -1,0 +1,2 @@
+function [theta, r_sqrd] = l_regression(x, y, atol)
+theta = zeros(2,1);
